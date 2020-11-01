@@ -2,14 +2,14 @@ import axios from 'axios' //axios
 import { Message } from 'element-ui'
 
 var baseURL;
-if (process.env.NODE_ENV === 'development') {          //自动切换接口地址 设置请求不同域名的接口
-    baseURL = "http://localhost:8889/api/private/v1/"    //开发环境 dev
-} else if (process.env.NODE_ENV === "production") {
-    baseURL = "http://localhost:8888/api/private/v1/";   //上线环境  build
-} else if (process.env.NODE_ENV === 'test') {
-    baseURL = "http://localhost:8887/api/private/v1/";   //测试环境
+// if (process.env.NODE_ENV === 'development') {          //自动切换接口地址 设置请求不同域名的接口
+//     baseURL = "http://localhost:8889/api/private/v1/"    //开发环境 dev
+// } else if (process.env.NODE_ENV === "production") {
+//     baseURL = "http://localhost:8888/api/private/v1/";   //上线环境  build
+// } else if (process.env.NODE_ENV === 'test') {
+//     baseURL = "http://localhost:8887/api/private/v1/";   //测试环境
 
-}
+// }
 const instance = axios.create({  //设置到实例上面
     // baseURL
     baseURL: process.env.VUE_APP_baseURL
