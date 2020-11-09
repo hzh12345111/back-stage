@@ -2,6 +2,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/Login'
+import params from "../views/goods/params"
 import store from '../store/index.js'  //在js文件获取不到$store 所以需要获取store
 Vue.use(VueRouter)
 
@@ -9,19 +10,68 @@ const routes = [
   {
     path: '/',
     name: 'Index',
-    redirect: '/home'
-
+    redirect: {
+      name: 'Users'
+    }
+  },
+  {
+    path: '/home',
+    name: 'Home',
+    component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue'),
+    children: [
+      {
+        path: 'users',
+        name: 'Users',
+        component: () => import(/* webpackChunkName: "Users" */ '../views/users/users.vue')
+      },
+      {
+        path: 'roles',
+        name: 'Roles',
+        component: () => import(/* webpackChunkName: "roles" */ '../views/roles/roles.vue')
+      },
+      {
+        path: 'rights',
+        name: 'Rights',
+        component: () => import(/* webpackChunkName: "rights" */ '../views/roles/rights.vue')
+      },
+      {
+        path: 'goods',
+        name: 'Goods',
+        component: () => import(/* webpackChunkName: "goods" */ '../views/goods/goods.vue')
+      },
+      {
+        path: 'params',
+        name: 'Params',
+        component: params
+      },
+      {
+        path: 'categories',
+        name: 'Categories',
+        component: () => import(/* webpackChunkName: "categories" */ '../views/goods/categories.vue')
+      },
+      {
+        path: 'orders',
+        name: 'Orders',
+        component: () => import(/* webpackChunkName: "orders" */ '../views/orders/orders.vue')
+      },
+      {
+        path: 'reports',
+        name: 'Reports',
+        component: () => import(/* webpackChunkName: "reports" */ '../views/reports/reports.vue')
+      }
+    ]
   },
   {
     path: '/login',
     name: 'Login',
     component: Login
   },
-  {
-    path: '/home',
-    name: 'Home',
-    component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue')
-  }
+  // {
+  //   path: '/home',
+  //   name: 'Home',
+  //   component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue'),
+
+  // }
   // {
   //   path: '/login',
   //   name: 'Login',

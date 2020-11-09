@@ -73,8 +73,11 @@ export default {
                 message: res.meta.msg,
                 type: "success",
               });
+              this.$store.commit("setUsername", res.data.username);
               this.$store.commit("SET_TOKEN", res.data.token);
-              this.$router.push("/Home");
+              this.$router.push({
+                name: 'Users'
+              });
             })
             .catch((err) => {
               console.log(err);

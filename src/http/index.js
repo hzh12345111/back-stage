@@ -1,6 +1,7 @@
 import axios from 'axios' //axios
 import { Message } from 'element-ui'
-
+import store from '../store/index.js' //vuex 中保存token js需要引入
+import router from '../router'
 var baseURL;
 // if (process.env.NODE_ENV === 'development') {          //自动切换接口地址 设置请求不同域名的接口
 //     baseURL = "http://localhost:8889/api/private/v1/"    //开发环境 dev
@@ -15,19 +16,23 @@ const instance = axios.create({  //设置到实例上面
     baseURL: process.env.VUE_APP_baseURL
 })
 
-const http = (url, data, method = 'GET') => {     //封装axios
+const http = (url, data = {}, method = 'GET', params) => {     //封装axios
     return new Promise((resolve, reject) => {
-        instance({
+        instance({  //axios 实例
             url,
             data,
-            method
+            method,
+            params,
+            headers: {
+                Authorization: store.state.token //token 除了登录以外的接口 需要token 认证
+            }
         }).then(res => {
             if ((res.status >= 200) & (res.status < 300) || res.status === 304) {
                 //只是表示接口可以通了 //res.status===304 也成功 就是走缓存
-                if (res.data.meta.status === 200) {
+                if (res.data.meta.status === 200 || res.data.meta.status === 201) {
                     //证明用户名和密码是对的
                     resolve(res.data)
-                } else {
+                }else {
                     //说明密码或用户名不对
                     Message({
                         message: res.data.meta.msg,
