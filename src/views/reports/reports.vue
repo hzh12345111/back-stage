@@ -86,7 +86,7 @@ export default {
   box-sizing: border-box;
   background: #fff;
   border-radius: 5px;
-}
+}  
 .echarts,
 #main {
   width: 100%;
