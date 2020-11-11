@@ -35,8 +35,8 @@
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button type="primary" icon="el-icon-edit" circle size="small" @click="openEditUsersDialog(scope.row)"></el-button>
-            <el-button type="success" icon="el-icon-check" circle size="small" @click="rolesUser(scope.row)"></el-button>
             <el-button type="danger" icon="el-icon-delete" circle size="small" @click="deletUsers(scope.row.id)"></el-button>
+            <el-button type="success" icon="el-icon-check" circle size="small" @click="rolesUser(scope.row)"></el-button>
           </template>  
         </el-table-column>
       </el-table>

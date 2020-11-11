@@ -1,11 +1,7 @@
 <template>
   <div class="reports">
     <!-- 面包屑 -->
-    <el-breadcrumb separator="/">
-      <el-breadcrumb-item :to="{ path: '/home/users' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>数据统计</el-breadcrumb-item>
-      <el-breadcrumb-item>数据报表</el-breadcrumb-item>
-    </el-breadcrumb>
+    <bread-crumb :breadCrumbObj="breadCrumbObj"></bread-crumb>
     <!-- <chart ref="charts" :options="option"></chart> -->
     <div id="main" ref="echart"></div>
   </div>
@@ -17,60 +13,68 @@ import echarts from "echarts";
 export default {
   data() {
     return {
+      breadCrumbObj: {
+        second: "数据统计",
+        third: "数据报表",
+      },
       type: "1",
-      option: {}
+      option: {},
     };
   },
   created() {
     this.getReports();
   },
   methods: {
-     getReports() { 
-       this.$axios(`reports/type/${this.type}`,"get")
-        .then(res => {
+    getReports() {
+      this.$axios(`reports/type/${this.type}`, "get")
+        .then((res) => {
           // console.log(res);
           this.option = res.data;
-      const optionEcharts = {
-        title: {
-          text: ""
-        },
-        tooltip: {
-          trigger: "axis",
-          axisPointer: {
-            type: "cross",
-            label: {
-              backgroundColor: "#6a7985"
-            }
-          }
-        },
-        legend: {
-          data: ["邮件营销", "联盟广告", "视频广告", "直接访问", "搜索引擎"]
-        },
-        toolbox: {
-          feature: {
-            saveAsImage: {}
-          }
-        },
-        grid: {
-          left: "3%",
-          right: "4%",
-          bottom: "3%",
-          containLabel: true
-        }
-      };
-      this.myChart.setOption({...this.option,...optionEcharts});
+          const optionEcharts = {
+            title: {
+              text: "",
+            },
+            tooltip: {
+              trigger: "axis",
+              axisPointer: {
+                type: "cross",
+                label: {
+                  backgroundColor: "#6a7985",
+                },
+              },
+            },
+            legend: {
+              data: [
+                "邮件营销",
+                "联盟广告",
+                "视频广告",
+                "直接访问",
+                "搜索引擎",
+              ],
+            },
+            toolbox: {
+              feature: {
+                saveAsImage: {},
+              },
+            },
+            grid: {
+              left: "3%",
+              right: "4%",
+              bottom: "3%",
+              containLabel: true,
+            },
+          };
+          this.myChart.setOption({ ...this.option, ...optionEcharts });
         })
-        .catch(err => {});
-
-      
+        .catch((err) => {});
     },
     showData() {
       // console.log(this);
-    }
+    },
   },
   mounted() {
     this.myChart = echarts.init(document.getElementById("main"));
-  }
+  },
 };
 </script>
 
