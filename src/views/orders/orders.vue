@@ -2,7 +2,7 @@
   <div class="orders">
     <!-- 面包屑 -->
      <bread-crumb :breadCrumbObj="breadCrumbObj"></bread-crumb>
-    <el-table :data="orderList.goods" style="width: 100%;margin-top:20px" border>
+    <el-table :data="orderList.goods" style="width: 100%;margin-top:20px" border height="500">
       <el-table-column type="index" width="50" label="#"></el-table-column>
       <el-table-column label="订单编号" prop="order_number"></el-table-column>
       <el-table-column label="订单价格" prop="order_price"></el-table-column>
@@ -17,7 +17,7 @@
       <el-table-column label="操作">
         <el-button icon="el-icon-edit" size="small" plain></el-button>
       </el-table-column>
-    </el-table>
+    </el-table>  
     <!-- 分页 -->
     <el-pagination
       @size-change="handleSizeChange"
